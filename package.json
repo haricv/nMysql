@@ -1,0 +1,14 @@
+{ "name": "nMysql"
+, "version": "0.0.1"
+, "engines": ["node >= 0.4.0"]
+, "main": "index.js"
+, "dependencies":
+  {  
+   "mysql": ">= 0",
+   "mysql-pool": ">= 0",
+  }
+, "scripts":
+  { 
+  
+  }
+}
