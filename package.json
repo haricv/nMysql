@@ -5,10 +5,7 @@
 , "dependencies":
   {  
    "mysql": ">= 0",
-   "mysql-pool": ">= 0",
+   "mysql-pool": ">= 0"
   }
-, "scripts":
-  { 
-  
-  }
+
 }
