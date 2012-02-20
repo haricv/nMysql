@@ -8,17 +8,25 @@ Synopsis:
 
 var db = require ('nMysql');
 
+//server1 configuration
 var c = {host: "localhost",user:"root",password: "",database: "testdb", pool_size:6}; 
 var d= new db.connect(c);
 
+//server2 config
 var c2 = {host: "another_host",user:"root",password: "",database: "testdb", pool_size:1}; 
 var d2 = new db.connect(c2);
 
+//multiple queries//
 var query1 = d.query("Select NOW() as ctime ");
 var query2 = d2.query("Select NOW() as ctime ");
+var query3 = d.query("Select NOW() as ctime ");
+var query4 = d2.query("Select NOW() as ctime ");
 
 
-
+//event capturing.
+//server1 events will be avaible with d.on
+//the id is the query id we are getting a query has been registered.
+//such that we can see which query result is retuning data/error
 d.on ("query_error", function (id,err){
 	console.log("FATAL ERROR (Query id %s) : %s", id ,  err.message);
 });
@@ -26,12 +34,13 @@ d.on ("query_error", function (id,err){
 d.on ("query_complete", function (id,r){ 
 	console.log("Result %s, %j ",id,r); 
 });
-
-
-d.on ("query_error", function (id,err){
+ 
+//event capturing.
+//server2 events will be avaible with d.on
+d2.on ("query_error", function (id,err){
 	console.log("FATAL ERROR (Query id %s) : %s", id ,  err.message);
 });
  
-d.on ("query_complete", function (id,r){ 
+d2.on ("query_complete", function (id,r){ 
 	console.log("Result %s, %j ",id,r); 
 });
